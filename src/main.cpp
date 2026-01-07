@@ -1,6 +1,5 @@
 #include <mpi.h>
 #include <iostream>
-#include <cstring>
 
 #define PING_PONG_LIMIT 10
 
