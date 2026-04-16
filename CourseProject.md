@@ -141,8 +141,7 @@ Thursday, April, 16 at 10AM by submitting the URL to your Github repository via 
 ## Deliverables
 
 You are expected to produce working code, reproducible runs, and a short report. The required deliverables are listed below.
-
-* A NetGameSim based generator that outputs connected weighted graphs and saves the random seed used.
+* A NetGameSim based generator is used to output connected weighted graphs.
 * A partitioning tool that assigns each node to exactly 1 MPI rank and emits an ownership map.
 * An MPI runtime in C or C++ that loads the graph and partition, then runs leader election and distributed Dijkstra.
 * A metrics summary that includes runtime, total messages sent, bytes sent, and per algorithm iteration counts.
@@ -161,8 +160,8 @@ If any item below is true, the grade for this project is 0%.
 * Your submission is mostly copied basic graph manipulation examples from other repos and does not implement the required project pipeline and algorithms.
 
 Core functionality for this project means all items below work on at least two nontrivial generated graphs.
-
-* NetGameSim graph generation or import works and is reproducible by seed.
+* Ensure that all operations performed on generated graphs are reproducible by enforcing deterministic execution through a fixed seed. Any algorithm that involves randomness during graph processing such as sampling, traversal tie-breaking, layout adjustments, stochastic optimization, or probabilistic pruning must be controlled by a seedable random number generator. The seed must be initialized at the beginning of execution and consistently used across all components that introduce non-determinism.
+* Additionally, eliminate implicit sources of variability by enforcing stable ordering where applicable, for example when iterating over nodes, edges, or adjacency structures. The program should expose the seed as a configurable parameter if you use some randomization inside your program and record it alongside outputs so that the exact sequence of operations and resulting graph transformations can be reproduced precisely on the same input graph.
 * The graph is partitioned across multiple MPI ranks.
 * Leader election runs to completion and all nodes agree on the same leader.
 * Distributed Dijkstra runs to completion and produces correct shortest path distances from a chosen source.
